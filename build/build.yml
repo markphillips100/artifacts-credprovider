@@ -44,7 +44,7 @@ steps:
   inputs:
     command: build
     projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    arguments: '--configuration $(BuildConfiguration)'
+    arguments: '--framework netcoreapp3.0 --configuration $(BuildConfiguration)'
 
 - ${{ if eq(parameters.sign, 'true') }}:
   - task: MSBuild@1
