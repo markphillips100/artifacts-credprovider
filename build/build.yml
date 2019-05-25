@@ -8,12 +8,12 @@ steps:
   inputs:
     version: 3.0.100-preview5-011568
 
-# NuGet Tool Installer
-# Acquires a specific version of NuGet from the internet or the tools cache and adds it to the PATH. Use this task to change the version of NuGet used in the NuGet tasks.
-- task: NuGetToolInstaller@0
-  inputs:
-    versionSpec: '5.1.0' 
-    # checkLatest: true # Optional
+# # NuGet Tool Installer
+# # Acquires a specific version of NuGet from the internet or the tools cache and adds it to the PATH. Use this task to change the version of NuGet used in the NuGet tasks.
+# - task: NuGetToolInstaller@0
+#   inputs:
+#     versionSpec: '5.1.0' 
+#     # checkLatest: true # Optional
 
 - task: DotNetCoreCLI@2
   displayName: dotnet restore NuGet.config
@@ -39,12 +39,19 @@ steps:
       restoreDirectory: 'packages'
       vstsFeed: '6a2d6fd3-0b16-40f0-b309-7175c4e86490'
 
-- task: MSBuild@1
+# - task: MSBuild@1
+#   displayName: Build CredentialProvider
+#   inputs:
+#     solution: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
+#     configuration: '$(BuildConfiguration)'
+#     msbuildArguments: '/t:rebuild'
+
+- task: DotNetCoreCLI@2
   displayName: Build CredentialProvider
   inputs:
-    solution: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    configuration: '$(BuildConfiguration)'
-    msbuildArguments: '/t:rebuild'
+    command: build
+    projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
 
 - ${{ if eq(parameters.sign, 'true') }}:
   - task: MSBuild@1
