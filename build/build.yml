@@ -76,12 +76,12 @@ steps:
     zipAfterPublish: false
     modifyOutputPath: false
 
-- ${{ if ne(parameters.sign, 'true') }}:
-  - task: DotNetCoreCLI@2
-    displayName: dotnet test
-    inputs:
-      command: test
-      projects: 'CredentialProvider.Microsoft.Tests/CredentialProvider.Microsoft.Tests.csproj'
+# - ${{ if ne(parameters.sign, 'true') }}:
+#   - task: DotNetCoreCLI@2
+#     displayName: dotnet test
+#     inputs:
+#       command: test
+#       projects: 'CredentialProvider.Microsoft.Tests/CredentialProvider.Microsoft.Tests.csproj'
 
 - task: CopyFiles@2
   displayName: Copy netcore files into tarball
