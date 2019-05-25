@@ -1,11 +1,14 @@
 resources:
 - repo: self
 
-queue:
-  demands: msbuild
+# queue:
+#   demands: msbuild
+
+pool:
+  vmImage: windows-2019
 
 trigger:
-- master
+- core3-preview5
 
 variables:
   BuildConfiguration: 'Debug'
