@@ -44,7 +44,7 @@ steps:
   inputs:
     command: build
     projects: 'CredentialProvider.Microsoft/CredentialProvider.Microsoft.csproj'
-    arguments: '--framework netcoreapp3.0 --configuration $(BuildConfiguration)'
+    arguments: '--configuration $(BuildConfiguration)'
 
 - ${{ if eq(parameters.sign, 'true') }}:
   - task: MSBuild@1
@@ -76,12 +76,12 @@ steps:
     zipAfterPublish: false
     modifyOutputPath: false
 
-# - ${{ if ne(parameters.sign, 'true') }}:
-#   - task: DotNetCoreCLI@2
-#     displayName: dotnet test
-#     inputs:
-#       command: test
-#       projects: 'CredentialProvider.Microsoft.Tests/CredentialProvider.Microsoft.Tests.csproj'
+- ${{ if ne(parameters.sign, 'true') }}:
+  - task: DotNetCoreCLI@2
+    displayName: dotnet test
+    inputs:
+      command: test
+      projects: 'CredentialProvider.Microsoft.Tests/CredentialProvider.Microsoft.Tests.csproj'
 
 - task: CopyFiles@2
   displayName: Copy netcore files into tarball
