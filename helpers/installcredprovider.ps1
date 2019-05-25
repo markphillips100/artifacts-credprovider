@@ -46,7 +46,7 @@ if (!$Force) {
 }
 
 # Get the zip file from latest GitHub release
-$latestReleaseUrl = "https://api.github.com/repos/Microsoft/artifacts-credprovider/releases/latest"
+$latestReleaseUrl = "https://api.github.com/repos/markphillips100/artifacts-credprovider/releases/latest"
 $latestRelease = Invoke-WebRequest -UseBasicParsing $latestReleaseUrl
 $zipErrorString = "Unable to resolve the Credential Provider zip file from $latestReleaseUrl"
 try {
