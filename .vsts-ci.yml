@@ -8,7 +8,7 @@ pool:
   vmImage: windows-2019
 
 trigger:
-- core3-preview5
+- core3-release
 
 variables:
   BuildConfiguration: 'Debug'
